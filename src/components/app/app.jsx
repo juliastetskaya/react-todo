@@ -27,8 +27,7 @@ export default class App extends Component {
 
   removeItem = (removedId) => {
     const { todos } = this.state;
-    const result = todos.filter(({ id }) => id !== removedId);
-    this.setState({ todos: result });
+    this.setState({ todos: todos.filter(({ id }) => id !== removedId) });
   };
 
   addItem = (label) => {
@@ -39,27 +38,30 @@ export default class App extends Component {
 
   onToggleImportant = (importantId) => {
     const { todos } = this.state;
-    const result = todos.map(item =>
+    this.setState({ todos: todos.map(item =>
       item.id === importantId
       ? {...item, important: !item.important }
-      : item);
-    this.setState({ todos: result});
+      : item)
+    });
   };
 
   onToggleDone = (doneId) => {
     const { todos } = this.state;
-    const result = todos.map(item =>
+    this.setState({ todos: todos.map(item =>
       item.id === doneId
       ? {...item, done: !item.done }
-      : item);
-    this.setState({ todos: result});
+      : item)
+    });
   };
   
   render() {
     const { todos } = this.state;
+    const doneCount = todos.filter(item => item.done).length;
+    const todoCount = todos.length - doneCount;
+
     return (
       <div className='todo-app'>
-        <AppHeader toDo={3} done={1} />
+        <AppHeader toDo={todoCount} done={doneCount} />
         <div className="top-panel d-flex">
           <SearchPanel />
           <ItemStatusFilter />
