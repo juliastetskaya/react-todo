@@ -3,6 +3,7 @@ import AppHeader from '../app-header';
 import SearchPanel from '../search-panel';
 import ItemStatusFilter from '../item-status-filter';
 import TodoList from '../todo-list';
+import ItemAddForm from '../ItemAddForm';
 
 export default class App extends Component {
   state = {
@@ -18,6 +19,20 @@ export default class App extends Component {
     const result = todos.filter(({ id }) => id !== removedId);
     this.setState({ todos: result });
   }
+
+  addItem = (item) => {
+    const { todos } = this.state;
+    const result = [...todos, { label: item, important: false, id: 4 }];
+    this.setState({ todos: result });
+  }
+
+  onToggleImportant = (id) => {
+    console.log('Important', id);
+  }
+
+  onToggleDone = (id) => {
+    console.log('Done', id);
+  }
   
   render() {
     const { todos } = this.state;
@@ -28,7 +43,12 @@ export default class App extends Component {
           <SearchPanel />
           <ItemStatusFilter />
         </div>
-        <TodoList todos={todos} onRemove={this.removeItem}/>
+        <TodoList
+          todos={todos}
+          onRemove={this.removeItem}
+          onToggleImportant={this.onToggleImportant}
+          onToggleDone={this.onToggleDone}/>
+        <ItemAddForm addItem={this.addItem}/>
       </div>
     );
   }
