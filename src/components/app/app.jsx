@@ -6,33 +6,54 @@ import TodoList from '../todo-list';
 import ItemAddForm from '../ItemAddForm';
 
 export default class App extends Component {
+  id = 1;
+
   state = {
     todos: [
-    { label: 'Drink Coffee', important: false, id: 1 },
-    { label: 'Make Awesome App', important: true, id: 2 },
-    { label: 'Have a lunch', important: false, id: 3 },
+      this.createTodoItem('Drink Coffee'),
+      this.createTodoItem('Make Awesome App'),
+      this.createTodoItem('Have a lunch'),
     ]
-  }
+  };
+
+  createTodoItem(label) {
+    return {
+      label,
+      important: false,
+      done: false,
+      id: this.id++,
+    }
+  };
 
   removeItem = (removedId) => {
     const { todos } = this.state;
     const result = todos.filter(({ id }) => id !== removedId);
     this.setState({ todos: result });
-  }
+  };
 
-  addItem = (item) => {
+  addItem = (label) => {
     const { todos } = this.state;
-    const result = [...todos, { label: item, important: false, id: 4 }];
-    this.setState({ todos: result });
-  }
+    const newItem = this.createTodoItem(label);
+    this.setState({ todos: [...todos, newItem] });
+  };
 
-  onToggleImportant = (id) => {
-    console.log('Important', id);
-  }
+  onToggleImportant = (importantId) => {
+    const { todos } = this.state;
+    const result = todos.map(item =>
+      item.id === importantId
+      ? {...item, important: !item.important }
+      : item);
+    this.setState({ todos: result});
+  };
 
-  onToggleDone = (id) => {
-    console.log('Done', id);
-  }
+  onToggleDone = (doneId) => {
+    const { todos } = this.state;
+    const result = todos.map(item =>
+      item.id === doneId
+      ? {...item, done: !item.done }
+      : item);
+    this.setState({ todos: result});
+  };
   
   render() {
     const { todos } = this.state;
