@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from 'classnames';
 
 const TodoListItem = (props) => {
   const {
@@ -10,17 +11,14 @@ const TodoListItem = (props) => {
     important
   } = props;
 
-  let classes = "todo-list-item";
-  if (done) {
-    classes += ' done';
-  }
-
-  if (important) {
-    classes += ' important';
-  }
+  const itemClasses = cn({
+    'todo-list-item': true,
+    done,
+    important
+  });
 
   return (
-    <span className={classes}>
+    <span className={itemClasses}>
       <span
         className="todo-list-item-label"
         onClick={onToggleDone}>

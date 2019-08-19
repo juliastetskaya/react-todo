@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import cn from 'classnames';
 
 export default class ItemStatusFilter extends Component {
   buttons = [
@@ -11,10 +12,14 @@ export default class ItemStatusFilter extends Component {
     const { onFilter, filter } = this.props;
 
     const buttons = this.buttons.map(({ name, label }) => {
-      const activeClass = filter === name ? 'btn-info' : 'btn-outline-secondary';
+      const buttonClasses = cn({
+        btn: true,
+        'btn-info': filter === name,
+        'btn-outline-secondary': filter !== name,
+      })
       return (
         <button type="button"
-                className={`btn ${activeClass}`}
+                className={buttonClasses}
                 key={name}
                 onClick={() => onFilter(name)}>{label}</button>
       )
