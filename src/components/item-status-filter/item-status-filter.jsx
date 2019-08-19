@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import cn from 'classnames';
 
 export default class ItemStatusFilter extends Component {
@@ -16,14 +16,19 @@ export default class ItemStatusFilter extends Component {
         btn: true,
         'btn-info': filter === name,
         'btn-outline-secondary': filter !== name,
-      })
+      });
+
       return (
-        <button type="button"
-                className={buttonClasses}
-                key={name}
-                onClick={() => onFilter(name)}>{label}</button>
-      )
-    })
+        <button
+          type="button"
+          className={buttonClasses}
+          key={name}
+          onClick={() => onFilter(name)}
+        >
+          {label}
+        </button>
+      );
+    });
 
     return (
       <div className="btn-group">
@@ -31,4 +36,4 @@ export default class ItemStatusFilter extends Component {
       </div>
     );
   }
-};
+}
