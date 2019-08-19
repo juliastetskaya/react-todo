@@ -1,4 +1,4 @@
-# You can try app [here](https://juliastetskaya.github.io/todo-list/)
+# You can try the app [here](https://juliastetskaya.github.io/todo-list/)
 
 ## Available Scripts
 
