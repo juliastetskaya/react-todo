@@ -1,6 +1,6 @@
-# You can try the app [here](https://juliastetskaya.github.io/react-todo/)
+## You can try the app [here](https://juliastetskaya.github.io/react-todo/)
 
-## Launch
+### Launch
 
 `yarn`
 
